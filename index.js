@@ -10,7 +10,7 @@ ReactDOM.render(
 registerServiceWorker();
 
 /**
-	The code below refresh the page without reloading it
+	The code below refresh the page without reloading it!
 */
 if(module.hot){
 	module.hot.accept();
