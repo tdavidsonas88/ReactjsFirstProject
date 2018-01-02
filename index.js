@@ -14,4 +14,4 @@ registerServiceWorker();
 */
 if(module.hot){
 	module.hot.accept();
-}<quick></quick>
+}
