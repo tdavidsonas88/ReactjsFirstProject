@@ -9,6 +9,9 @@ ReactDOM.render(
  	document.getElementById('root'));
 registerServiceWorker();
 
+/**
+	The code below refresh the page without reloading it
+*/
 if(module.hot){
 	module.hot.accept();
-}
+}<quick></quick>
