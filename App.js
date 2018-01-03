@@ -21,6 +21,23 @@ const list = [
 ];
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      list: list,
+    };
+
+    this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  onDismiss(id) {
+    const isNotId = item => item.objectID !== id;
+    const updatedList = this.state.list.filter(isNotId);
+    this.setState({ list: updatedList });
+  }
+
   render() {
     const helloWorld = 'Welcome to the Road to learn React';
     var person = {firstName: "Tadas", lastName: "Davidsonas"};
@@ -31,7 +48,7 @@ class App extends Component {
           The user learning this course is {person.firstName} {person.lastName}<br/>
           module.hot helps to make refresh without reloading the page
         </p>
-        {list.map(item =>
+        {this.state.list.map(item =>
             <div key={item.objectID}>
               <span>
                 <a href={item.url}>{item.title}</a>
@@ -39,6 +56,13 @@ class App extends Component {
               <span>{item.author}</span>
               <span>{item.num_comments}</span>
               <span>{item.points}</span>
+              <span>
+                <button
+                    onClick={() => this.onDismiss(item.objectID)}
+                    type="button">
+                        Dismiss
+                </button>
+              </span>
             </div>
         )}
       </div>
