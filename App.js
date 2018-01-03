@@ -20,16 +20,34 @@ const list = [
   },
 ];
 
+// higher order function ES5
+// function isSearched(searchTerm) {
+//     return function (item) {
+//         return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+//
+//     }
+// }
+
+// ES6 fucntion
+const isSearched = searchTerm => item =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 class App extends Component {
 
   constructor(props){
     super(props);
 
     this.state = {
-      list: list,
+      list,
+      searchTerm: '',
     };
 
+    this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  onSearchChange(event) {
+    this.setState({ searchTerm: event.target.value })
   }
 
   onDismiss(id) {
@@ -48,7 +66,15 @@ class App extends Component {
           The user learning this course is {person.firstName} {person.lastName}<br/>
           module.hot helps to make refresh without reloading the page
         </p>
-        {this.state.list.map(item =>
+
+          <form>
+              <input
+                  type="text"
+                  onChange={this.onSearchChange}
+              />
+          </form>
+
+        {this.state.list.filter(isSearched(this.state.searchTerm)).map(item =>
             <div key={item.objectID}>
               <span>
                 <a href={item.url}>{item.title}</a>
@@ -65,6 +91,7 @@ class App extends Component {
               </span>
             </div>
         )}
+
       </div>
     );
   }
